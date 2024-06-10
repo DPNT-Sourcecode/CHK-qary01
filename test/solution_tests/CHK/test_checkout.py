@@ -15,9 +15,17 @@ class TestCheckout():
         '''Test that an offer corrects the total price for checkout'''
         assert checkout("AAA") == 130
     
-    def test_checkout_multi_offer(self):
+    def test_checkout_higher_quantity_offer(self):
         '''Test that an offer corrects the total price for checkout'''
-        assert checkout("AAAAAA") == 260
+        assert checkout("AAAAA") == 200
+    
+    def test_checkout_multi_offer_offer(self):
+        '''Test that an offer corrects the total price for checkout'''
+        assert checkout("AAAAAAAA") == 330
+    
+    def test_checkout_multi_offer_with_quantity_offer(self):
+        '''Test that an offer corrects the total price for checkout'''
+        assert checkout("AAAAAAAAA") == 380
     
     def test_checkout_offer_with_excess(self):
         '''Test that an offer reduces the price and products not meeting the threshold will
