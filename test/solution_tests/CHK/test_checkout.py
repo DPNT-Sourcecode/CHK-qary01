@@ -1,4 +1,4 @@
-from solutions.CHK.checkout_solution import checkout
+from lib.solutions.CHK.checkout_solution import checkout
 
 
 class TestCheckout():
@@ -55,5 +55,8 @@ class TestCheckout():
     def test_checkout_discount_on_other_sku_checkout_stops_offer(self):
         '''Test enough quantity of sku will result less quantity of another sku'''
         assert checkout("EEBB") == 110
+    
+    def test_checkout_discount_on_other_sku_with_no_quantity(self):
+        '''Test enough quantity of sku will result less quantity of another sku'''
+        assert checkout("EE") == 80
         
-
