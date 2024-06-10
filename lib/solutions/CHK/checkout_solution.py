@@ -28,7 +28,7 @@ def checkout(skus):
     checkout_quantity = defaultdict(int)
     for product in skus:
         if product in prices:
-            checkout[product]+=1
+            checkout_quantity[product]+=1
         else:
             return -1
     
@@ -48,4 +48,5 @@ def checkout(skus):
 
 
     
+
 
