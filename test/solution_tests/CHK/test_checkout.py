@@ -1,4 +1,4 @@
-from lib.solutions.CHK.checkout_solution import checkout
+from solutions.CHK.checkout_solution import checkout
 
 
 class TestCheckout():
@@ -56,3 +56,4 @@ class TestCheckout():
         '''Test enough quantity of sku will result less quantity of another sku'''
         assert checkout("EEBB") == 110
         
+

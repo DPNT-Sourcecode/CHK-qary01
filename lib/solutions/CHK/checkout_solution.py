@@ -11,9 +11,12 @@ def checkout(skus):
         return -1
     
     # Dictionary of lists of offers and prices
-    # TODO Define a hirerarchy of offers, greatest to lowest
+    # NOTE The offers can be the new price of this quantity or a free item 
+    # The structure is a list of offers (tuples) on a sku where the first element is the quantity
+    # required and the second element is the discount either the price for those items or the sku which is free
     # Potentially define a topological sort to check which offers have an impact on others
-    # Given the offer list is so small this may be overkill
+    # Given the offer list is so small this is probably overkill but may be nessisary in the future
+    # If offers become more complex
     offers = {
         "A": [(3, 130), (5,200)],
         "B": [(2, 45)],
@@ -68,4 +71,5 @@ def checkout(skus):
 
 
     
+
 
