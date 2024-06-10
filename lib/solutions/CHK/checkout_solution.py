@@ -10,13 +10,19 @@ def checkout(skus):
     if not isinstance(skus, str):
         return -1
     
-    # Dictionary for offers and prices
+    # Dictionary of lists of offers and prices
+    # TODO Define a hirerarchy of offers, greatest to lowest
+    # Potentially define a topological sort to check which offers have an impact on others
+    # Given the offer list is so small this may be overkill
     offers = {
-        "A": (3, 130),
-        "B": (2, 45)
+        "A": [(3, 130), (5,200)],
+        "B": [(2, 45)],
+        "E": [(2, "B")]
+        
     }
 
     prices = {
+        "E": 40,
         "A": 50,
         "B": 30,
         "C": 20,
@@ -36,10 +42,23 @@ def checkout(skus):
     for product in checkout_quantity.keys():
         # Calculate the cost on special offer
         if product in offers:
-            while checkout_quantity[product] >= offers[product][0]:
-                # Incrementing total by offer and reducing the checkout quantity
-                total+= offers[product][1]
-                checkout_quantity[product] -= offers[product][0]
+            while checkout_quantity[product] >= offers[product][0][0]:
+                # Getting a better offer by checking quantity against other offers for this product
+                current_offer = offers[product][0]
+                idx = 0
+                while len(offers[product]) > (idx +1) and checkout_quantity[product] >= offers[product][idx+1][0]:
+                    idx+=1
+                    current_offer = offers[product][idx]
+                # Evaluate Offer
+                if isinstance(current_offer[1], int):
+                    # Incrementing total by offer and reducing the checkout quantity
+                    total+= current_offer[1]
+                else:
+                    # Offer is discount on another product
+                    total+=prices[product]*current_offer[0]
+                    if checkout_quantity[current_offer[1]] > 0:
+                        checkout_quantity[current_offer[1]] -=1
+                checkout_quantity[product] -= current_offer[0]
             
         if checkout_quantity[product] > 0:
             total += checkout_quantity[product]*prices[product]
@@ -48,3 +67,4 @@ def checkout(skus):
 
 
     
+
