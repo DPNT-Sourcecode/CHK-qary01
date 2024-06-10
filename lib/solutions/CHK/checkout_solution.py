@@ -42,7 +42,14 @@ def checkout(skus):
             return -1
     
     total = 0
-    for product in checkout_quantity.keys():
+    # TODO
+    # Traversing through the prices, adds unnessisary compute in a supermarket with a lot of products
+    # For now without using a topological sort this is a workaround given the time strain on this exercise
+    # If time allows, we can optimise this later to reduce unnesisary work
+    for product in prices.keys():
+
+        if product not in checkout_quantity:
+            continue
         # Calculate the cost on special offer
         if product in offers:
             while checkout_quantity[product] >= offers[product][0][0]:
@@ -71,4 +78,5 @@ def checkout(skus):
 
 
     
+
 
