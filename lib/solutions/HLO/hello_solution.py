@@ -3,4 +3,8 @@
 # noinspection PyUnusedLocal
 # friend_name = unicode string
 def hello(friend_name):
-    return "Hello, World!"
+    if isinstance(friend_name, str):
+        return f"Hello, {friend_name.capitalize()}!"
+    
+    raise ValueError("Friend name must be a string.")
+
