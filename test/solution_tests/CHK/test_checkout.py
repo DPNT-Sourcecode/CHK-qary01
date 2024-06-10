@@ -1,4 +1,4 @@
-from solutions.CHK.checkout_solution import checkout
+from lib.solutions.CHK.checkout_solution import checkout
 
 
 class TestCheckout():
@@ -60,8 +60,11 @@ class TestCheckout():
         '''Test enough quantity of sku will compute even if there is no sku to remove'''
         assert checkout("EE") == 80
     
+    # Ok the problem is how we're receiving the input
     def test_checkout_1(self):
         '''Test enough quantity of sku will result less quantity of another sku'''
+        # EEEE
+        # My response is 205
         assert checkout("BEBEEE") == 160
 
     def test_checkout_2(self):
@@ -71,4 +74,4 @@ class TestCheckout():
 
     def test_checkout_3(self):
         '''Test enough quantity of sku will result less quantity of another sku'''
-        assert checkout("ABCDEABCDE") == 665
+        assert checkout("ABCDECBAABCABBAAAEEAA") == 665
