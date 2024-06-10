@@ -55,6 +55,7 @@ def checkout(skus):
                     total+= current_offer[1]
                 else:
                     # Offer is discount on another product
+                    # Updat the total, reduce quantity of the other product
                     total+=prices[product]*current_offer[0]
                     if checkout_quantity[current_offer[1]] > 0:
                         checkout_quantity[current_offer[1]] -=1

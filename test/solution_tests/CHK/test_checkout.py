@@ -1,4 +1,4 @@
-from solutions.CHK.checkout_solution import checkout
+from lib.solutions.CHK.checkout_solution import checkout
 
 
 class TestCheckout():
@@ -34,11 +34,11 @@ class TestCheckout():
     
     def test_checkout_sku_not_in_inventory(self):
         '''Test unexpected sku not in inventory results in -1 response'''
-        assert checkout("E") == -1
+        assert checkout("F") == -1
     
     def test_checkout_product_combo_of_sku_in_and_not_in_inventory(self):
         '''Test unexpected sku in an otherwise valid basket will result in -1 response'''
-        assert checkout("AE") == -1
+        assert checkout("AF") == -1
     
     def test_checkout_all_skus(self):
         '''Test all skus come to correct total'''
@@ -48,3 +48,11 @@ class TestCheckout():
         '''Test products added to basket in various order will still trigger offers'''
         assert checkout("ABCDBAA") == 210
     
+    def test_checkout_discount_on_other_sku_checkout(self):
+        '''Test enough quantity of sku will result less quantity of another sku'''
+        assert checkout("EEB") == 80
+    
+    def test_checkout_discount_on_other_sku_checkout_stops_offer(self):
+        '''Test enough quantity of sku will result less quantity of another sku'''
+        assert checkout("EEBB") == 110
+        
