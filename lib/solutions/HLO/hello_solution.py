@@ -7,5 +7,3 @@ def hello(friend_name):
         return f"Hello, {friend_name.title()}!"
     
     raise ValueError("Friend name must be a string.")
-
-
