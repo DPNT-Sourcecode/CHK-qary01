@@ -1,0 +1,42 @@
+from lib.solutions.CHK.checkout_solution import checkout
+
+
+class TestCheckout():
+
+    def test_checkout(self):
+        '''Test checkout with normal input'''
+        assert checkout("AA") == 100
+    
+    def test_bad_input(self):
+        '''Test checkout with bad input'''
+        assert checkout(50) == -1
+    
+    def test_checkout_offer(self):
+        '''Test that an offer corrects the total price for checkout'''
+        assert checkout("AAA") == 130
+    
+    def test_checkout_multi_offer(self):
+        '''Test that an offer corrects the total price for checkout'''
+        assert checkout("AAAAAA") == 260
+    
+    def test_checkout_offer_with_excess(self):
+        '''Test that an offer reduces the price and products not meeting the threshold will
+        be added to total at regular price'''
+        assert checkout("AAAA") == 180
+    
+    def test_checkout_sku_not_in_inventory(self):
+        '''Test unexpected sku not in inventory results in -1 response'''
+        assert checkout("E") == -1
+    
+    def test_checkout_product_combo_of_sku_in_and_not_in_inventory(self):
+        '''Test unexpected sku in an otherwise valid basket will result in -1 response'''
+        assert checkout("AE") == -1
+    
+    def test_checkout_all_skus(self):
+        '''Test all skus come to correct total'''
+        assert checkout("ABCD") == 115
+    
+    def test_checkout_product_multi_offer_checkout(self):
+        '''Test products added to basket in various order will still trigger offers'''
+        assert checkout("ABCDBAA") == 210
+    
