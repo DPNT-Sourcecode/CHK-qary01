@@ -57,6 +57,18 @@ class TestCheckout():
         assert checkout("EEBB") == 110
     
     def test_checkout_discount_on_other_sku_with_no_quantity(self):
-        '''Test enough quantity of sku will result less quantity of another sku'''
+        '''Test enough quantity of sku will compute even if there is no sku to remove'''
         assert checkout("EE") == 80
-        
+    
+    def test_checkout_1(self):
+        '''Test enough quantity of sku will result less quantity of another sku'''
+        assert checkout("BEBEEE") == 160
+
+    def test_checkout_2(self):
+        '''Test enough quantity of sku will result less quantity of another sku'''
+        assert checkout("ABCDEABCDE") == 280
+    
+
+    def test_checkout_3(self):
+        '''Test enough quantity of sku will result less quantity of another sku'''
+        assert checkout("ABCDEABCDE") == 665
